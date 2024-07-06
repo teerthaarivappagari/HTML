@@ -1,0 +1,138 @@
+<html lang="en">
+
+  <head>
+
+    <title>Async programing</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <style>
+
+      body{
+
+        background-color: aqua;
+
+      }
+
+      h1{
+
+        margin: 20px;
+
+        color:blue;
+
+        font-family: 'Courier New', Courier, monospace;
+
+      }
+
+      label{
+
+        color:blue;
+
+      }
+
+      #name, #delay{
+
+        color:red
+
+      }
+
+      #output{
+
+        color:rgb(12,20,255);
+
+        font-size:xx-large;
+
+        margin:30px;
+
+      }
+
+      section{
+
+        align-items: center;
+
+        padding:10px;
+
+        text-align: center;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <section>
+
+    <h1> Wake up Alarm</h1>
+
+    <label>Enter Name:</label>
+
+    <input type="text" id="name">
+
+    <br>
+
+    <label>Wakeup after:</label>
+
+    <input type="text" id="delay">
+
+    <br>
+
+    <button id="set-alarm">Set alarm</button>
+
+    <div id="output"></div>
+
+    </section>
+
+    <script>
+
+      const name = document.querySelector("#name");
+
+      const delay = document.querySelector("#delay");
+
+      const button = document.querySelector("#set-alarm");
+
+      const output = document.querySelector("#output");
+
+      function alarm(person, delay) {
+
+      return new Promise((resolve, reject) => {
+
+        if (delay <= 0) {
+
+        throw new Error("Alarm delay must not be zero or negative");
+
+        }
+
+        setTimeout(() => {
+
+        resolve(`Wake up, ${person}!`);
+
+        }, delay);
+
+      });
+
+      }
+
+      button.addEventListener("click", () => {
+
+      alarm(name.value, delay.value)
+
+        .then((message) => (output.textContent = message))
+
+        .catch((error) => (output.textContent = `Couldn't set alarm: ${error}`));
+
+      });
+
+    </script>
+
+  </body>
+
+</html>
+
+
+
+
+
